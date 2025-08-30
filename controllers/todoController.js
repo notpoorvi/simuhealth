@@ -68,3 +68,10 @@ const deleteTodo = (req, res) => {
     todos.splice(todoIdx, 1);
     res.status(200).json({ message: "Todo item succesfully deleted!" });
 };
+
+module.exports = {
+    getTodos,
+    createTodo,
+    updateTodo,
+    deleteTodo
+};
