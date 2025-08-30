@@ -1,16 +1,20 @@
 require('dotenv').config()
 const express = require("express")
 const app = express()
-const todoRoutes = require("./routes/todoRoutes.js")
+
+const loggerMiddleware = require("./middlewares/loggerMiddleware.js");
+app.use(loggerMiddleware);
+
 const authRoutes = require("./routes/authRoutes.js")
+const todoRoutes = require("./routes/todoRoutes.js")
 
 // use json middleware
 app.use(express.json());
 
+// mount auth routes
+app.use("/auth", authRoutes)
 // mount todo routes
 app.use("/todos", todoRoutes)
-// mount auth routes
-app.use("/login", authRoutes)
 
 app.get('/', (req, res) => {
     res.send("<h1>This is a simple Todo application</h1>")
