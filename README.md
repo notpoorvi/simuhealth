@@ -12,16 +12,19 @@ Made using Node Js and Express for Simuhealth's backend exercise
 
 ## Project Structure:
 
+<pre>
+.
 ├── config
-│ └── db.js
+│      └── db.js
 ├── controllers
-│ ├── authController.js
-│ └── todoController.js
+│      ├── authController.js
+│      └── todoController.js
 ├── middlewares
-│ ├── authMiddleware.js
-│ └── loggerMiddleware.js
+│      ├── authMiddleware.js
+│      └── loggerMiddleware.js
 ├── routes
-│ ├── authRoutes.js
-│ └── todoRoutes.js
+│      ├── authRoutes.js
+│      └── todoRoutes.js
 ├── README.md
 └── server.js
+</pre>
