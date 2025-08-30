@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const todoController = require("../controllers/todoController.js");
+// for creation, update, and deletion of todos
 const authMiddleware = require("../middlewares/authMiddleware.js")
 
 router.get("/", todoController.getTodos);

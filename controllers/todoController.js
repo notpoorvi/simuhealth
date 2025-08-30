@@ -6,12 +6,15 @@ const getTodos = (request, response) => {
     const { userId, title, description } = request.query;
     let filteredTodos = todos;
 
+    // if userId is specified
     if (userId) {
         filteredTodos = filteredTodos.filter((todoItem) => todoItem.userId === Number(userId))
     }
+    // if title is specified
     if (title) {
         filteredTodos = filteredTodos.filter((todoItem) => todoItem.title.toLowerCase().includes(title.toLowerCase()))
     }
+    // if description is specified
     if (description) {
         filteredTodos = filteredTodos.filter((todoItem) => todoItem.description.toLowerCase().includes(description.toLowerCase()))
     }
@@ -22,7 +25,7 @@ const getTodos = (request, response) => {
 const createTodo = (request, response) => {
     const title = request.body.title;
     if (!title) {
-        response.status(400).json({ error: "Title cannot be empty" });
+        response.status(400).json({ error: "title cannot be empty" });
     }
     // create new todo item with given params
     const newTodoItem = {
@@ -42,14 +45,14 @@ const updateTodo = (request, response) => {
     const oldTodoItem = todos.find((element => element.id === todoId));
     // if the todo item to be updated doesn't exist, then send error response with status code 404
     if (!oldTodoItem) {
-        response.status(404).json({ error: "Todo item not found" });
+        response.status(404).json({ error: "todo item not found" });
         return;
     }
     const userId = request.user.id;
     // first verify userId matches todo.userId
     if (userId !== oldTodoItem.userId) {
         // send error message with unauthorized access status 403
-        response.status(403).json({ error: "Unauthorized access: you're not the owner of this todo item" });
+        response.status(403).json({ error: "unauthorized access: you're not the owner of this todo item" });
         return;
     }
 
@@ -67,19 +70,19 @@ const deleteTodo = (request, response) => {
     const todoItem = todos.find((element => element.id === todoId));
     // if the todo item to be deleted doesn't exist, then send error response with status code 404
     if (!todoItem) {
-        response.status(404).json({ error: "Todo item not found" });
+        response.status(404).json({ error: "todo item not found" });
         return;
     }
     const userId = request.user.id;
     // first verify userId matches todoItem.userId
     if (userId !== todoItem.userId) {
         // send error message with unauthorized access status 403
-        response.status(403).json({ error: "Unauthorized access: you're not the owner of this todo item" });
+        response.status(403).json({ error: "unauthorized access: you're not the owner of this todo item" });
         return;
     }
     const todoIdx = todos.indexOf(todoItem);
     todos.splice(todoIdx, 1);
-    response.status(200).json({ message: "Todo item succesfully deleted!" });
+    response.status(200).json({ message: "todo item succesfully deleted!" });
 };
 
 module.exports = {
