@@ -5,11 +5,11 @@ const app = express()
 const loggerMiddleware = require("./middlewares/loggerMiddleware.js");
 app.use(loggerMiddleware);
 
-const authRoutes = require("./routes/authRoutes.js")
-const todoRoutes = require("./routes/todoRoutes.js")
-
 // use json middleware
 app.use(express.json());
+
+const authRoutes = require("./routes/authRoutes.js")
+const todoRoutes = require("./routes/todoRoutes.js")
 
 // mount auth routes
 app.use("/auth", authRoutes)
