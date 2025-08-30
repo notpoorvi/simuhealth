@@ -1,8 +1,21 @@
 const { todos, idCounters } = require("../config/db.js")
 
-// get all the todo items, every user can see all todos
+// get all the todo items, filter them is specified, every user can see all todos
 const getTodos = (request, response) => {
-    response.json({ todos })
+    // get the filtering params
+    const { userId, title, description } = request.query;
+    let filteredTodos = todos;
+
+    if (userId) {
+        filteredTodos = filteredTodos.filter((todoItem) => todoItem.userId === Number(userId))
+    }
+    if (title) {
+        filteredTodos = filteredTodos.filter((todoItem) => todoItem.title.toLowerCase().includes(title.toLowerCase()))
+    }
+    if (description) {
+        filteredTodos = filteredTodos.filter((todoItem) => todoItem.description.toLowerCase().includes(description.toLowerCase()))
+    }
+    response.status(200).json(filteredTodos)
 };
 
 // create a todo item
